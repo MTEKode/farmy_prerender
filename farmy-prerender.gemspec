@@ -5,7 +5,7 @@ require "farmy/prerender/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "farmy_prerender"
-  spec.version       = Farmy::VERSION
+  spec.version       = FarmyG::VERSION
   spec.authors       = ["farmy00"]
   spec.email         = ["marcos@toribioespadas.es"]
 

@@ -1,8 +1,8 @@
 require "test_helper"
 
-class Farmy::PrerenderTest < Minitest::Test
+class FarmyG::PrerenderTest < Minitest::Test
   def test_that_it_has_a_version_number
-    refute_nil ::Farmy::Prerender::VERSION
+    refute_nil ::FarmyG::Prerender::VERSION
   end
 
   def test_it_does_something_useful

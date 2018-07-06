@@ -1,3 +1,3 @@
-module Farmy
+module FarmyG
   VERSION = "0.1.0"
 end

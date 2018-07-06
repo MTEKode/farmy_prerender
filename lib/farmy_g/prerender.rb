@@ -3,7 +3,7 @@
 require 'farmy/prerender/version'
 require 'http'
 
-module Farmy
+module FarmyG
   class Prerender
     include Singleton
 
