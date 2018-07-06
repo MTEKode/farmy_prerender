@@ -1,7 +1,7 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "farmy/prerender/version"
+require "farmy_g/prerender/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "farmy_prerender"
