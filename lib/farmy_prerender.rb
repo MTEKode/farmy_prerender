@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'farmy_prerender/version'
+require_relative 'farmy_prerender/selector'
 require 'http'
 require 'redis'
 
@@ -57,5 +58,3 @@ class FarmyPrerender
   end
 
 end
-
-FarmyPrerender.instance.render('/hofladen/milch-eier')
