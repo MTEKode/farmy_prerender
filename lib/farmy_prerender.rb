@@ -15,7 +15,7 @@ class FarmyPrerender
   def initialize
     @redis = Redis.new(driver: :hiredis)
     @render_server = 'http://localhost:5000'
-    @host = 'http://lvh.me:3000'
+    @host = 'http://staging5.farmy.ch'
   end
 
   def render(path)
