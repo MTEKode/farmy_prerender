@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
-class  FarmyPrerender
+module FarmyPrerender
   class Selector
-    def initialize(app)
+    def initialize(app, options)
       @app = app
+      @tool = Tool.new(options)
     end
 
     def call(env)
@@ -14,7 +15,7 @@ class  FarmyPrerender
 
     def rendered_response(env)
       key_uri = env['REQUEST_URI']
-      FarmyPrerender.instance.rendered_view(key_uri)
+      @tool.rendered_view_raw(key_uri)
     end
 
     def build_response(env, new_response)
@@ -39,8 +40,8 @@ class  FarmyPrerender
     end
 
     def has_render_param?(env)
-      request = Rack::Request.new(env)
-      true if Rack::Utils.parse_query(request.query_string).has_key?('_escaped_fragment_')
+      query_params = Rack::Utils.parse_query(Rack::Request.new(env).query_string)
+      true if query_params.has_key?('_escaped_fragment_') && !query_params.has_key?('url')
     end
 
   end
