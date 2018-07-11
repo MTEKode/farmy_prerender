@@ -3,10 +3,10 @@ module FarmyPrerender
     PRERENDER_REDIS_KEY = 'prerender_'
 
     def initialize(options)
-      raise('Need Initialize host and render_server') if valid_options?(options)
+      raise('Need Initialize host and render_server') unless valid_options?(options)
       @redis = Redis.new(driver: :hiredis)
-      @host = options['host']
-      @render_server = options['render_server']
+      @host = options[:host]
+      @render_server = options[:render_server]
     end
 
     def render(path)
@@ -59,7 +59,7 @@ module FarmyPrerender
     end
 
     def valid_options?(options)
-      options.has_key?('render_server') && options.has_key?('host')
+      options.has_key?(:render_server) && options.has_key?(:host)
     end
   end
 end

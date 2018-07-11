@@ -2,7 +2,7 @@
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/farmy/prerender`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-TODO: Delete this and the text above, and describe your gem
+Prerender middleware for prerender_server: TODO
 
 ## Installation
 
@@ -22,7 +22,29 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Is needed an instance of prerender, options:
+
+* Your prerender instance:
+    ```
+    git clone https://github.com/mtoribio/prerender
+    ```
+    ```
+    yarn install
+    ```
+    ```
+    node server.js
+    ```
+* Prerender.io instance, check prerender.io.
+
+
+Add config in your application.rb
+
+```ruby
+config.middleware.insert_before 0, FarmyPrerender::Selector, {
+    render_server: 'render server host',
+    host: 'rails server host'
+}
+```
 
 ## Development
 
