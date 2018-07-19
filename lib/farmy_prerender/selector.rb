@@ -4,6 +4,8 @@ module FarmyPrerender
   class Selector
     def initialize(app, options)
       @app = app
+      @render_server = options[:render_server]
+      @use_redis = !options[:redis].nil?
       @tool = Tool.new(options)
     end
 
@@ -15,7 +17,7 @@ module FarmyPrerender
 
     def rendered_response(env)
       key_uri = env['REQUEST_URI']
-      @tool.rendered_view_raw(key_uri)
+      @use_redis ? @tool.rendered_view(key_uri) : @tool.rendered_view_raw(key_uri)
     end
 
     def build_response(env, new_response)
@@ -27,6 +29,7 @@ module FarmyPrerender
     end
 
     def should_rendered_view?(env)
+      return false unless render_server_alive?
       return true if is_robot?(env)
       return true if has_render_param?(env)
       false
@@ -41,7 +44,20 @@ module FarmyPrerender
 
     def has_render_param?(env)
       query_params = Rack::Utils.parse_query(Rack::Request.new(env).query_string)
-      true if query_params.has_key?('_escaped_fragment_') && !query_params.has_key?('url')
+      true if query_params.has_key?('_force_rendered_') && !query_params.has_key?('url')
+    end
+
+    def render_server_alive?
+      uri_server = URI(@render_server)
+      begin
+        Timeout.timeout(120) do
+          s = TCPSocket.new(uri_server.hostname, uri_server.port)
+          s.close
+        end
+        return true
+      rescue Errno::ECONNREFUSED, Timeout::Error, StandardError
+        return false
+      end
     end
 
   end
