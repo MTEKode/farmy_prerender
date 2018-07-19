@@ -2,6 +2,24 @@
 
 Custom middleware for prerender.
 
+
+## Installation
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'farmy_prerender'
+```
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install farmy_prerender
+
+
 ## Usage
 
 Options:
@@ -38,24 +56,6 @@ Rails.configuration.middleware.insert_before 0, FarmyPrerender::Selector, {
   Redis.current.
 * default_render_robot: this option is used if you want that the middleware
   response will be a rendered response by default. 
-
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'farmy_prerender'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install farmy_prerender
-
 
 ## Prerender Server
 
