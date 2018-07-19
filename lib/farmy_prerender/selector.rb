@@ -6,6 +6,7 @@ module FarmyPrerender
       @app = app
       @render_server = options[:render_server]
       @use_redis = !options[:redis].nil?
+      @default_render_robot = options[:default_render_robot].nil? ? true : false
       @tool = Tool.new(options)
     end
 
@@ -30,7 +31,7 @@ module FarmyPrerender
 
     def should_rendered_view?(env)
       return false unless render_server_alive?
-      return true if is_robot?(env)
+      return true if is_robot?(env) && @default_render_robot
       return true if has_render_param?(env)
       false
     end
